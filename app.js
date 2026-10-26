@@ -3,26 +3,33 @@ const addButton = document.getElementsByTagName('button')[0];
 const incompleteTaskHolder = document.getElementById('incompleteTasks');
 const completedTasksHolder = document.getElementById('completed-tasks');
 
+const createElement = (tagName, className, textContent = '') => {
+  const element = document.createElement(tagName);
+  element.className = className;
+
+  if (textContent) {
+    element.innerText = textContent;
+  }
+
+  return element;
+};
+
 const createNewTaskElement = function (taskString) {
   const listItem = document.createElement('li');
+
   const checkBox = document.createElement('input');
-  const label = document.createElement('label');
-  const editInput = document.createElement('input');
-  const editButton = document.createElement('button');
-  const deleteButton = document.createElement('button');
-  const deleteButtonImg = document.createElement('img');
-
-  label.innerText = taskString;
-  label.className = 'task';
-
   checkBox.type = 'checkbox';
+
+  const label = createElement('label', 'task', taskString);
+
+  const editInput = createElement('input', 'task');
   editInput.type = 'text';
-  editInput.className = 'task';
 
-  editButton.innerText = 'Edit';
-  editButton.className = 'edit';
+  const editButton = createElement('button', 'edit', 'Edit');
 
-  deleteButton.className = 'delete';
+  const deleteButton = createElement('button', 'delete');
+
+  const deleteButtonImg = document.createElement('img');
   deleteButtonImg.src = './remove.svg';
   deleteButton.appendChild(deleteButtonImg);
 
@@ -31,6 +38,7 @@ const createNewTaskElement = function (taskString) {
   listItem.appendChild(editInput);
   listItem.appendChild(editButton);
   listItem.appendChild(deleteButton);
+
   return listItem;
 };
 
